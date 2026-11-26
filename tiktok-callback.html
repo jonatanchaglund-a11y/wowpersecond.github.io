@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Connecting TikTok… – Wow Per Second Studio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header><img src="logo.png" alt="" /><a href="./">Wow Per Second</a></header>
+  <main>
+    <h1>Connecting TikTok…</h1>
+    <p id="msg" class="lead">Handing the sign-in back to Wow Per Second Studio on this computer.</p>
+  </main>
+  <script>
+    // TikTok requires an https redirect address. This page passes the one-time sign-in code
+    // straight on to the studio running on the owner's own computer (127.0.0.1). Nothing is stored here.
+    (function () {
+      var q = window.location.search;
+      if (!q || q.indexOf("code=") === -1 && q.indexOf("error=") === -1) {
+        document.getElementById("msg").textContent = "No sign-in code found. Start again from the studio.";
+        return;
+      }
+      window.location.replace("http://127.0.0.1:4747/oauth/tiktok/callback" + q);
+    })();
+  </script>
+</body>
+</html>
